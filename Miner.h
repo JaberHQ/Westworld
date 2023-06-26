@@ -1,31 +1,49 @@
 #ifndef MINER_H
 #define MINER_H
 
-#include "State.h"
 #include "Vector.h"
+#include "BaseGameEntity.h"
+#include "StateMachine.h"
 class Miner : public BaseGameEntity
 {
 public:
-	Miner(int ID);
+	Miner(int id);
+
+	~Miner();
 
 	virtual void Update() override;
-
-	void ChangeState(State* pNewState);
 
 	Vector2D GetLocation() const;
 
 	void ChangeLocation(Vector2D& vector);
 
-	void AddToGoldCarried(int iaddToGold);
+	void AddToGoldCarried(int addToGold);
 	void IncreaseFatigue();
 
 	bool PocketsFull();
 	bool Thirsty();
+
+	// Deposit gold in bank
+	void DepositGoldInBank(int amountOfGoldToDeposit);
+
+	int GetGoldCarried() const;
+
+	int GetMoneyInBank() const;
+
+	void RestUp();
+
+	bool IsRested();
+
+	void QuenchThirst();
+	
+	StateMachine<Miner>* GetFSM() const;
+
+
 private:
 	
-	// A pointer to an instance of the State
-	State* m_pCurrentState;
-	
+	// Instance of the state machine class
+	StateMachine<Miner>* m_pStateMachine;
+
 	// Place where miner is currently situated
 	Vector2D m_Location;
 
@@ -40,6 +58,7 @@ private:
 
 	// The higher the value, the more tired the miner
 	int m_iFatigue;
+
 };
 
 

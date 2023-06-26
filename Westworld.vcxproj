@@ -128,25 +128,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseGameEntity.cpp" />
-    <ClCompile Include="ExitMineAndDigForNuggetState.cpp" />
-    <ClCompile Include="GoHomeAndSleepTillRestedState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MinerOwnedStates.cpp" />
     <ClCompile Include="Miner.cpp" />
-    <ClCompile Include="QuenchThirstState.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="Vector.cpp" />
-    <ClCompile Include="VisitBankAndDepositGoldState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseGameEntity.h" />
-    <ClInclude Include="ExitMineAndDigForNuggetState.h" />
-    <ClInclude Include="GoHomeAndSleepTillRestedState.h" />
+    <ClInclude Include="EntityNames.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="Miner.h" />
-    <ClInclude Include="QuenchThirstState.h" />
+    <ClInclude Include="MinerOwnedStates.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Vector.h" />
-    <ClInclude Include="VisitBankAndDepositGoldState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

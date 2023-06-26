@@ -21,25 +21,13 @@
     <ClCompile Include="BaseGameEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Miner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExitMineAndDigForNuggetState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VisitBankAndDepositGoldState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GoHomeAndSleepTillRestedState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QuenchThirstState.cpp">
+    <ClCompile Include="MinerOwnedStates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,16 +47,13 @@
     <ClInclude Include="Helpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExitMineAndDigForNuggetState.h">
+    <ClInclude Include="StateMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VisitBankAndDepositGoldState.h">
+    <ClInclude Include="MinerOwnedStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GoHomeAndSleepTillRestedState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QuenchThirstState.h">
+    <ClInclude Include="EntityNames.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

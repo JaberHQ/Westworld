@@ -4,7 +4,6 @@
 class BaseGameEntity
 {
 public:
-	BaseGameEntity();
 	BaseGameEntity(int id);
 	~BaseGameEntity();
 

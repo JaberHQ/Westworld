@@ -1,9 +1,5 @@
 #include "BaseGameEntity.h"
 
-BaseGameEntity::BaseGameEntity()
-{
-}
-
 BaseGameEntity::BaseGameEntity(int id)
 	:m_ID()
 {
