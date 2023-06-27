@@ -1,10 +1,9 @@
 #include "Miner.h"
 #include "MinerOwnedStates.h"
-
 #include <assert.h>
 
 Miner::Miner(int id)
-	:m_Location(),
+	:m_Location(shack),
 	m_iGoldCarried(0),
 	m_iMoneyInBank(0),
 	m_iThurst(0),
@@ -35,12 +34,12 @@ StateMachine<Miner>* Miner::GetFSM() const
 	return m_pStateMachine;
 }
 
-Vector2D Miner::GetLocation() const
+location_type Miner::GetLocation() const
 {
 	return m_Location;
 }
 
-void Miner::ChangeLocation(Vector2D& newLocation)
+void Miner::ChangeLocation(location_type newLocation)
 {
 	m_Location = newLocation;
 }
@@ -58,7 +57,7 @@ void Miner::IncreaseFatigue()
 bool Miner::PocketsFull()
 {
 	// If gold carried is value then pockets are full
-	if(m_iGoldCarried >= 10) 
+	if(m_iGoldCarried >= 3) 
 		return true;
 	return false;
 }
@@ -73,6 +72,11 @@ bool Miner::Thirsty()
 void Miner::DepositGoldInBank(int amountOfGoldToDeposit)
 {
 	m_iMoneyInBank += amountOfGoldToDeposit;
+}
+
+void Miner::SetGoldCarried(int goldCarried)
+{
+	m_iGoldCarried = goldCarried;
 }
 
 int Miner::GetGoldCarried() const

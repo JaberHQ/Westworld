@@ -38,6 +38,10 @@ private:
 
 	VisitBankAndDepositGold& operator= (const VisitBankAndDepositGold&);
 
+private:
+	int enoughGoldToGoHome = 0; 
+
+
 };
 
 

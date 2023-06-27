@@ -10,11 +10,11 @@ int main()
 {
 	Miner miner(entity_Miner_Bob);
 
-	for(int i =0; i < 120; i++)
+	for(int i =0; i < 20; i++)
 	{
 		miner.Update();
 
-		Sleep(900);
+		Sleep(800);
 	}
 	return 0;
 }

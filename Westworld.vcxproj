@@ -137,6 +137,7 @@
     <ClInclude Include="BaseGameEntity.h" />
     <ClInclude Include="EntityNames.h" />
     <ClInclude Include="Helpers.h" />
+    <ClInclude Include="Locations.h" />
     <ClInclude Include="Miner.h" />
     <ClInclude Include="MinerOwnedStates.h" />
     <ClInclude Include="State.h" />

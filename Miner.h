@@ -4,6 +4,8 @@
 #include "Vector.h"
 #include "BaseGameEntity.h"
 #include "StateMachine.h"
+#include "Locations.h"
+
 class Miner : public BaseGameEntity
 {
 public:
@@ -13,9 +15,9 @@ public:
 
 	virtual void Update() override;
 
-	Vector2D GetLocation() const;
+	location_type GetLocation() const;
 
-	void ChangeLocation(Vector2D& vector);
+	void ChangeLocation(location_type vector);
 
 	void AddToGoldCarried(int addToGold);
 	void IncreaseFatigue();
@@ -26,6 +28,7 @@ public:
 	// Deposit gold in bank
 	void DepositGoldInBank(int amountOfGoldToDeposit);
 
+	void SetGoldCarried(int goldCarried);
 	int GetGoldCarried() const;
 
 	int GetMoneyInBank() const;
@@ -45,7 +48,7 @@ private:
 	StateMachine<Miner>* m_pStateMachine;
 
 	// Place where miner is currently situated
-	Vector2D m_Location;
+	location_type m_Location;
 
 	// How many nuggets the miner has carried in his pocket
 	int m_iGoldCarried;

@@ -56,5 +56,8 @@
     <ClInclude Include="EntityNames.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Locations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

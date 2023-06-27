@@ -1,2 +1,3 @@
-﻿  Main.cpp
+﻿  MinerOwnedStates.cpp
+C:\Users\Jaber\Documents\GitHub\Westworld\EntityNames.h(18): warning C4715: 'GetNameOfEntity': not all control paths return a value
   Westworld.vcxproj -> C:\Users\Jaber\Documents\GitHub\Westworld\x64\Debug\Westworld.exe

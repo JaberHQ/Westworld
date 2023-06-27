@@ -2,6 +2,7 @@
 #include "Vector.h"
 #include "Miner.h"
 #include "EntityNames.h"
+#include "Locations.h"
 
 EnterMineAndDigForNugget* EnterMineAndDigForNugget::Instance()
 {
@@ -12,7 +13,6 @@ EnterMineAndDigForNugget* EnterMineAndDigForNugget::Instance()
 
 void EnterMineAndDigForNugget::Enter(Miner* pMiner)
 {
-    Vector2D goldmine; // Temp variable for goldmine location - move into header
 
     // If mine is not locatied at the mine, go to mine
     if(pMiner->GetLocation() != goldmine)
@@ -20,7 +20,7 @@ void EnterMineAndDigForNugget::Enter(Miner* pMiner)
         std::cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
             << "Walkin' to the gold mine";
 
-        pMiner->ChangeLocation(goldmine);
+       pMiner->ChangeLocation(goldmine);
     }
 }
 
@@ -37,13 +37,13 @@ void EnterMineAndDigForNugget::Execute(Miner* pMiner)
         << "Pickin' up a nugget";
 
     // If enough gold is mined, go and put it in the bank
-    if (pMiner->PocketsFull())
+    if(pMiner->PocketsFull())
     {
         pMiner->GetFSM()->ChangeState(VisitBankAndDepositGold::Instance());
     }
 
     // If thirsty get a whiskey
-    if (pMiner->Thirsty())
+    if(pMiner->Thirsty())
     {
         pMiner->GetFSM()->ChangeState(QuenchThirst::Instance());
     }
@@ -64,8 +64,6 @@ VisitBankAndDepositGold* VisitBankAndDepositGold::Instance()
 
 void VisitBankAndDepositGold::Enter(Miner* pMiner)
 {
-    Vector2D bank; // Temp variable for bank location - move into header
-
     // If mine is not locatied at the mine, go to mine
     if (pMiner->GetLocation() != bank)
     {
@@ -83,18 +81,18 @@ void VisitBankAndDepositGold::Execute(Miner* pMiner)
     std::cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
         << "Depositin' gold. Total savings now: " << pMiner->GetMoneyInBank();
 
-    static int enoughGoldToGoHome = 0; // Check static works
-
-    if (enoughGoldToGoHome >= 5)
+    enoughGoldToGoHome += pMiner->GetGoldCarried();
+    pMiner->SetGoldCarried(0);
+    if(enoughGoldToGoHome >= 5)
     {
         std::cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
             << "Woohoo! Rich enough for now. Back home to mah li'l lady";
 
+        enoughGoldToGoHome = 0;
         pMiner->GetFSM()->ChangeState(GoHomeAndSleepTillRested::Instance());
     }
     else
     {
-        enoughGoldToGoHome++;
         pMiner->GetFSM()->ChangeState(EnterMineAndDigForNugget::Instance());
     }
 
@@ -115,15 +113,13 @@ GoHomeAndSleepTillRested* GoHomeAndSleepTillRested::Instance()
 
 void GoHomeAndSleepTillRested::Enter(Miner* pMiner)
 {
-    Vector2D home;
-
     // If mine is not locatied at the mine, go to mine
-    if (pMiner->GetLocation() != home)
+    if (pMiner->GetLocation() != shack)
     {
         std::cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
             << "Walkin' home";
 
-        pMiner->ChangeLocation(home);
+        pMiner->ChangeLocation(shack);
     }
 }
 
@@ -131,12 +127,16 @@ void GoHomeAndSleepTillRested::Execute(Miner* pMiner)
 {
     pMiner->RestUp();
 
-    std::cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
-        << "ZZZZ...";
+    
 
     if(pMiner->IsRested())
     {
-        pMiner->GetFSM()->ChangeState(VisitBankAndDepositGold::Instance());
+        pMiner->GetFSM()->ChangeState(EnterMineAndDigForNugget::Instance());
+    }
+    else
+    {
+        std::cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
+            << "ZZZZ...";
     }
 }
 
@@ -155,8 +155,6 @@ QuenchThirst* QuenchThirst::Instance()
 
 void QuenchThirst::Enter(Miner* pMiner)
 {
-    Vector2D saloon;
-
     // If mine is not locatied at the mine, go to mine
     if (pMiner->GetLocation() != saloon)
     {
