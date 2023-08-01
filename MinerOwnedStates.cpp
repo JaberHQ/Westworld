@@ -32,6 +32,7 @@ void EnterMineAndDigForNugget::Execute(Miner* pMiner)
 
     pMiner->AddToGoldCarried(1);
     pMiner->IncreaseFatigue();
+    pMiner->IncreaseThirst();
 
     std::cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
         << "Pickin' up a nugget";
@@ -41,6 +42,7 @@ void EnterMineAndDigForNugget::Execute(Miner* pMiner)
     {
         pMiner->GetFSM()->ChangeState(VisitBankAndDepositGold::Instance());
     }
+
 
     // If thirsty get a whiskey
     if(pMiner->Thirsty())
@@ -172,7 +174,7 @@ void QuenchThirst::Execute(Miner* pMiner)
     std::cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
         << "That's mighty fine sippin liquor";
 
-    if (!pMiner->Thirsty())
+    if(!pMiner->Thirsty())
     {
         pMiner->GetFSM()->ChangeState(EnterMineAndDigForNugget::Instance());
     }
@@ -201,4 +203,5 @@ void MinerGlobalState::Execute(Miner* pMiner)
 
 void MinerGlobalState::Exit(Miner* pMiner)
 {
+    pMiner->GetFSM()->RevertToPreviousState();
 }

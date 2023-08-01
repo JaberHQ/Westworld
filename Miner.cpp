@@ -8,6 +8,7 @@ Miner::Miner(int id)
 	m_iMoneyInBank(0),
 	m_iThurst(0),
 	m_iFatigue(0),
+	m_iMoneyEarntToday(0),
 	BaseGameEntity(id)
 {
 	m_pStateMachine = new StateMachine<Miner>(this);
@@ -32,6 +33,21 @@ void Miner::Update()
 StateMachine<Miner>* Miner::GetFSM() const
 {
 	return m_pStateMachine;
+}
+
+void Miner::AddToMoneyEarntToday(int addToMoneyEarntToday)
+{
+	m_iMoneyEarntToday += addToMoneyEarntToday;
+}
+
+void Miner::SetToMoneyEarntToday(int moneyEarntToday)
+{
+	m_iMoneyEarntToday += moneyEarntToday;
+}
+
+int Miner::GetMoneyEarntToday() const
+{
+	return m_iMoneyEarntToday;
 }
 
 location_type Miner::GetLocation() const
@@ -64,9 +80,14 @@ bool Miner::PocketsFull()
 
 bool Miner::Thirsty()
 {
-	if(m_iThurst >= 100)
+	if(m_iThurst <= 0)
+	{
 		return true;
-	return false;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Miner::DepositGoldInBank(int amountOfGoldToDeposit)
@@ -104,8 +125,13 @@ bool Miner::IsRested()
 void Miner::QuenchThirst()
 {
 	m_iGoldCarried -= 2;
-	m_iThurst = 0;
+	m_iThurst = 100;
 	// Need a check to see if Miner has enough funds -----------
+}
+
+void Miner::IncreaseThirst()
+{
+	m_iThurst += 20;
 }
 
 

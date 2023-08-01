@@ -39,8 +39,14 @@ public:
 
 	void QuenchThirst();
 	
+	void IncreaseThirst();
+
 	StateMachine<Miner>* GetFSM() const;
 
+	void AddToMoneyEarntToday(int addToMoneyEarntToday);
+	void SetToMoneyEarntToday(int moneyEarntToday);
+
+	int GetMoneyEarntToday() const;
 
 private:
 	
@@ -62,6 +68,8 @@ private:
 	// The higher the value, the more tired the miner
 	int m_iFatigue;
 
+	// Amount of money in bank before Miner goes to sleep
+	int m_iMoneyEarntToday;
 };
 
 
